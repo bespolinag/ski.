@@ -180,7 +180,6 @@ d_ang = np.gradient(abs_ang)
 p1, p2, p3, p4 = (d_ang >= 0) & (norm_ang < 0.35), (d_ang >= 0) & (norm_ang >= 0.35) & (norm_ang < 0.85), norm_ang >= 0.85, (d_ang < 0) & (norm_ang < 0.85)
 t1, t2, t3, t4 = np.sum(sub['dt'].to_numpy()[p1]), np.sum(sub['dt'].to_numpy()[p2]), np.sum(sub['dt'].to_numpy()[p3]), np.sum(sub['dt'].to_numpy()[p4])
 tab1, tab2, tab3 = st.tabs(["1. Фазы поворота", "2. Угол (°)", "3. Давление G"])
-with tab1:
 idx_12, idx_23, idx_34 = int(np.max(np.append(np.flatnonzero(p1), 0))), int(np.max(np.append(np.flatnonzero(p2), 0))), int(np.max(np.append(np.flatnonzero(p3), 0)))
 tick_x, tick_y = [], []
 dx_a, dy_a = np.gradient(sub['x'].to_numpy()), np.gradient(sub['y'].to_numpy())
@@ -197,21 +196,19 @@ f1.add_trace(go.Scatter(x=[sub['x'].iloc[i1], sub['x'].iloc[i2], sub['x'].iloc[i
 f1.update_layout(paper_bgcolor='#131a2a', plot_bgcolor='#131a2a', height=300, showlegend=False, margin=dict(t=10, b=10, l=10, r=40))
 f1.update_xaxes(scaleanchor="y", scaleratio=1, visible=False, fixedrange=True)
 f1.update_yaxes(visible=False, fixedrange=True)
-st.plotly_chart(f1, use_container_width=True, config={'displayModeBar': False})
-with tab2:
+tab1.plotly_chart(f1, use_container_width=True, config={'displayModeBar': False})
 f2 = go.Figure()
 f2.add_trace(go.Scatter(x=sub['x'], y=sub['y'], mode='markers+lines', line=dict(color='#1e293b', width=6), marker=dict(size=10, color=abs_ang, colorscale=[[0, '#1e293b'], [0.5, '#0284c7'], [1, '#7dd3fc']], cmin=0, cmax=68, colorbar=dict(title="°", len=0.7)), text=[f"Угол: {a:.1f}°" for a in abs_ang], hoverinfo='text'))
 f2.update_layout(paper_bgcolor='#131a2a', plot_bgcolor='#131a2a', height=300, showlegend=False, margin=dict(t=10, b=10, l=10, r=10))
 f2.update_xaxes(scaleanchor="y", scaleratio=1, visible=False, fixedrange=True)
 f2.update_yaxes(visible=False, fixedrange=True)
-st.plotly_chart(f2, use_container_width=True, config={'displayModeBar': False})
-with tab3:
+tab2.plotly_chart(f2, use_container_width=True, config={'displayModeBar': False})
 f3 = go.Figure()
 f3.add_trace(go.Scatter(x=sub['x'], y=sub['y'], mode='markers+lines', line=dict(color='#1e293b', width=6), marker=dict(size=10, color=sub['g'], colorscale=[[0, '#1e293b'], [0.5, '#e11d48'], [1, '#fda4af']], cmin=1.0, cmax=4.5, colorbar=dict(title="G", len=0.7)), text=[f"Давление: {g:.2f} G" for g in sub['g']], hoverinfo='text'))
 f3.update_layout(paper_bgcolor='#131a2a', plot_bgcolor='#131a2a', height=300, showlegend=False, margin=dict(t=10, b=10, l=10, r=10))
 f3.update_xaxes(scaleanchor="y", scaleratio=1, visible=False, fixedrange=True)
 f3.update_yaxes(visible=False, fixedrange=True)
-st.plotly_chart(f3, use_container_width=True, config={'displayModeBar': False})
+tab3.plotly_chart(f3, use_container_width=True, config={'displayModeBar': False})
 advice = "Потеря темпа из-за удара или срыва канта — затянута фаза загрузки." if row['delta'] > 0.12 else "Четкая работа по фазам, раннее давление и быстрый выход из дуги."
 st.markdown(f"Поворот №{int(row['num'])} | Время: {row['time']:.2f} с ({row['delta']:+.2f} с)
 Макс. закантовка: {row['max_ang']:.1f}° | Пик G: {row['max_g']:.2f}
