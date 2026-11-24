@@ -209,9 +209,12 @@ f3.update_layout(paper_bgcolor='#131a2a', plot_bgcolor='#131a2a', height=300, sh
 f3.update_xaxes(scaleanchor="y", scaleratio=1, visible=False, fixedrange=True)
 f3.update_yaxes(visible=False, fixedrange=True)
 tab3.plotly_chart(f3, use_container_width=True, config={'displayModeBar': False})
-advice = "Потеря темпа из-за удара или срыва канта — затянута фаза загрузки." if row['delta'] > 0.12 else "Четкая работа по фазам, раннее давление и быстрый выход из дуги."
-st.markdown(f"Поворот №{int(row['num'])} | Время: {row['time']:.2f} с ({row['delta']:+.2f} с)
-Макс. закантовка: {row['max_ang']:.1f}° | Пик G: {row['max_g']:.2f}
-1-Иниц: {t1:.2f}с · 2-Кант: {t2:.2f}с · 3-Апекс: {t3:.2f}с · 4-Разгр: {t4:.2f}с
+    advice = "Потеря темпа из-за удара или срыва канта — затянута фаза загрузки." if row['delta'] > 0.12 else "Четкая работа по фазам, раннее давление и быстрый выход из дуги."
+    h1 = f"<b>Поворот №{int(row['num'])}</b> | Время: <span class='accent-blue'><b>{row['time']:.2f} с</b></span> ({row['delta']:+.2f} с)<br>"
+    h2 = f"Макс. закантовка: <b>{row['max_ang']:.1f}°</b> | Пик G: <span class='accent-pink'><b>{row['max_g']:.2f}</b></span><br>"
+    h3 = f"<span style='font-size:12px;color:#94a3b8;'>1-Иниц: {t1:.2f}с · 2-Кант: {t2:.2f}с · 3-Апекс: {t3:.2f}с · 4-Разгр: {t4:.2f}с</span><br><br>"
+    h4 = f"💡 <b>Тренер:</b> {advice}"
+    st.markdown("<div class='card'>" + h1 + h2 + h3 + h4 + "</div>", unsafe_allow_html=True)
+
 
 💡 Тренер: {advice}", unsafe_allow_html=True)
