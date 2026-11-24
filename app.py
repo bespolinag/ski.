@@ -184,10 +184,10 @@ idx_12, idx_23, idx_34 = int(np.max(np.append(np.flatnonzero(p1), 0))), int(np.m
 tick_x, tick_y = [], []
 dx_a, dy_a = np.gradient(sub['x'].to_numpy()), np.gradient(sub['y'].to_numpy())
 for idx in [idx_12, idx_23, idx_34]:
-nrm = np.hypot(dx_a[idx], dy_a[idx]) + 1e-6
-nx, ny = -dy_a[idx] / nrm * 0.4, dx_a[idx] / nrm * 0.4
-tick_x.extend([sub['x'].iloc[idx] - nx, sub['x'].iloc[idx] + nx, None])
-tick_y.extend([sub['y'].iloc[idx] - ny, sub['y'].iloc[idx] + ny, None])
+        nrm = np.hypot(dx_a[idx], dy_a[idx]) + 1e-6
+        nx, ny = -dy_a[idx] / nrm * 0.4, dx_a[idx] / nrm * 0.4
+        tick_x.extend([sub['x'].iloc[idx] - nx, sub['x'].iloc[idx] + nx, None])
+        tick_y.extend([sub['y'].iloc[idx] - ny, sub['y'].iloc[idx] + ny, None])
 i1, i2, i3, i4 = int(np.median(np.append(np.flatnonzero(p1), 0))), int(np.median(np.append(np.flatnonzero(p2), idx_12))), int(np.median(np.append(np.flatnonzero(p3), idx_23))), int(np.median(np.append(np.flatnonzero(p4), idx_34)))
 f1 = go.Figure()
 f1.add_trace(go.Scatter(x=sub['x'], y=sub['y'], mode='lines', line=dict(color='#f8fafc', width=5), hoverinfo='skip'))
