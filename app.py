@@ -217,4 +217,4 @@ h4 = f"💡 <b>Тренер:</b> {advice}"
 st.markdown("<div class='card'>" + h1 + h2 + h3 + h4 + "</div>", unsafe_allow_html=True)
 
 
-💡 Тренер: {advice}", unsafe_allow_html=True)
+Тренер: {advice}", unsafe_allow_html=True)
