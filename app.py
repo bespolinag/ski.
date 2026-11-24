@@ -215,6 +215,3 @@ h2 = f"Макс. закантовка: <b>{row['max_ang']:.1f}°</b> | Пик G:
 h3 = f"<span style='font-size:12px;color:#94a3b8;'>1-Иниц: {t1:.2f}с · 2-Кант: {t2:.2f}с · 3-Апекс: {t3:.2f}с · 4-Разгр: {t4:.2f}с</span><br><br>"
 h4 = f"💡 <b>Тренер:</b> {advice}"
 st.markdown("<div class='card'>" + h1 + h2 + h3 + h4 + "</div>", unsafe_allow_html=True)
-
-
-Тренер: {advice}", unsafe_allow_html=True)
